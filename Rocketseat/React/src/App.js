@@ -4,8 +4,20 @@ import Header from "./components/Header";
 function App() {
     return(
         <>
-            <Header/>  
-            <Header/>  
+            <Header title="HomePage">
+                <ul>
+                    <li>oi</li>
+                    <li>oij</li>
+                    <li>oit</li>
+                </ul>
+            </Header>
+            <Header title="Projects">
+                <ul>
+                    <li>oi</li>
+                    <li>oij</li>
+                    <li>oit</li>
+                </ul>
+            </Header>
         </>   
     );   
 }
