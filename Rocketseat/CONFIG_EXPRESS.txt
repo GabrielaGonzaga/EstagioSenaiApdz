@@ -1,0 +1,12 @@
+npm install -g yarn
+Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy Unrestricted
+yarn init -y
+yarn add express
+yarn add nodemon
+yarn add uuidv4
+
+http://localhost:3333/projects
+
+  "scripts": {
+    "i": "nodemon ./src/index.js"
+  },

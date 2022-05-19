@@ -1,0 +1,51 @@
+npm install -g yarn
+yarn add react react-dom
+yarn add @babel/core @babel/preset-env @babel/preset-react webpack webpack-cli
+
+---------------------------------------------------------------
+babel.config.js 
+module.exports = {
+    presets: [
+
+        //convert (transpile) the code the current enviroment 
+        '@babel/preset-env',
+
+        //add the react functionalities on the tranpile
+        '@babel/preset-react'
+    ]
+}
+
+yarn add @babel/cli 
+yarn babel src/index.js --out-file public/bundle.js
+--------------------------------------------------------
+
+webpack.config
+yarn add babel-loader
+const path = require('path');
+
+module.exports ={
+    entry: path.resolve(__dirname, 'src', 'index.js'),
+    output: {
+        path: path.resolve(__dirname, 'public'),
+        filename: 'bundle.js'
+    },
+    devServer:{
+        static: {
+            directory: path.join(__dirname, "public")
+          },
+    },
+    module:{
+        rules:[{
+            test: /\.js$/, 
+            exclude: /node_module/, 
+            use: {
+                loader: 'babel-loader',
+            }
+        }]
+    }
+}
+
+//transpile to webpack
+yarn webpack --mode development
+yarn add webpack-dev-server -D
+yarn webpack-dev-server --mode development
