@@ -10,3 +10,8 @@ http://localhost:3333/projects
   "scripts": {
     "i": "nodemon ./src/index.js"
   },
+
+//CORS
+yarn add cors
+app.use(cors());
+const cors = require('cors');

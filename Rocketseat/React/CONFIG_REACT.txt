@@ -49,3 +49,39 @@ module.exports ={
 yarn webpack --mode development
 yarn add webpack-dev-server -D
 yarn webpack-dev-server --mode development
+yarn add style-loader css-loader
+yarn add file-loader
+yarn add axios
+yarn add path
+
+//CORS 
+yarn add cors (on the express)
+app.use(cors());
+const cors = require('cors');
+
+yarn add @babel/plugin-transform-runtime
+
+
+
+    // params: witch function 'll be shoot, 
+    // when this function will be shoot
+    useEffect(() => {
+        getdomAPI.get('projects').then(response =>{
+            console.log(response);
+        })
+    }, []);
+
+
+
+
+
+
+
+
+
+ /**
+     * useSate returns an array with 2 positions
+     * 
+     * 1. Variable with the initial value
+     * 2. Function to update that value
+*/
