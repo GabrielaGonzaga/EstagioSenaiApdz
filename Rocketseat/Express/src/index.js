@@ -30,14 +30,14 @@ const projects = [];
      const {method, url} = request;
      const logLabel = `[${method.toUpperCase()}] ${url}`;
 
-     console.log('1');
+    //  console.log('1');
      console.log(logLabel);
      console.time(logLabel);
 
      //return
      next(); //next middleware
 
-     console.log('3');
+    //  console.log('3');
      console.timeEnd(logLabel);
  }
 
@@ -59,7 +59,7 @@ app.use('/projects/:id', validateProjectId)
 
 app.get('/projects', (request, response) => {
 
-    console.log('2');
+    // console.log('2');
 
     //QUERY PARAMS
     const {title} = request.query;
@@ -72,6 +72,40 @@ app.get('/projects', (request, response) => {
     return response.json(results);
 });
 
+//LOGIN
+app.post('/login', (request, response) => {
+
+    const {title, owner} = request.body;
+
+    const projectFound = projects.findIndex(project => project.title == title && project.owner == owner);
+
+    if(projectFound < 0){
+        return response.status(400).json({error: 'email or password incorrects' });
+    }
+
+    return response.status(200).json({message: 'User logged'});
+});
+
+app.post('/login/:id', (request, response) => {
+
+    const {id} = request.params;
+
+    const {title, owner} = request.body;
+
+    const projectFound = projects.find(project => project.id == id);
+
+    if(projectFound.title == title && projectFound.owner == owner){
+
+        return response.status(200).json('User logged');
+
+    }else{
+
+        return response.status(400).json({error: 'email or password incorrects' });
+
+    }  
+
+});
+
 app.post('/projects', (request, response) => {
 
     //QUERY PARAMS
@@ -79,7 +113,6 @@ app.post('/projects', (request, response) => {
     const project = {id: uuid(), title, owner};
 
     projects.push(project);
-
     return response.json(project);
     
 });
