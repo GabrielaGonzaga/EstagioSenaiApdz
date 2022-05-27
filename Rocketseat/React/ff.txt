@@ -1,0 +1,9 @@
+yarn init -y
+yarn add express
+yarn tsc --init
+npx tsc --init
+yarn tsc-init
+yarn add @types/express -D
+yarn add ts-node-dev@1.0.00-pre.44 OR yarn add ts-node-dev -D 
+yarn add uuidv4
+yarn add date-fns
