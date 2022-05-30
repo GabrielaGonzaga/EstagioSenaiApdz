@@ -1,5 +1,5 @@
 Arguments: 
-  C:\Program Files\nodejs\node.exe C:\Program Files (x86)\Yarn\bin\yarn.js add date.fnsyarn add date-fns
+  C:\Program Files\nodejs\node.exe C:\Program Files (x86)\Yarn\bin\yarn.js add ts-node-dev 1.0.0-pre.44
 
 PATH: 
   C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\Python310\Scripts\;C:\Python310\;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\nodejs\;C:\ProgramData\chocolatey\bin;C:\Program Files\OpenJDK\openjdk-11.0.15_10\bin;C:\Program Files\OpenJDK\openjdk-8u332-b09\bin;C:\Program Files (x86)\Yarn\bin\;C:\Users\Gabriela Gonzaga\AppData\Local\Yarn\bin;C:\Users\Gabriela Gonzaga\AppData\Local\Android\Sdk\platform-tools;
@@ -14,7 +14,7 @@ Platform:
   win32 x64
 
 Trace: 
-  Error: https://registry.yarnpkg.com/date.fnsyarn: Not found
+  Error: https://registry.yarnpkg.com/1.0.0-pre.44: Not found
       at Request.params.callback [as _callback] (C:\Program Files (x86)\Yarn\lib\cli.js:66140:18)
       at Request.self.callback (C:\Program Files (x86)\Yarn\lib\cli.js:140885:22)
       at Request.emit (node:events:527:28)
@@ -34,6 +34,9 @@ npm manifest:
     "license": "MIT",
     "devDependencies": {
       "@types/express": "^4.17.13",
+      "eslint-config-prettier": "^8.5.0",
+      "eslint-plugin-prettier": "^4.0.0",
+      "prettier": "^2.6.2",
       "ts-node-dev": "^1.0.0-pre.44",
       "typescript": "^4.7.2"
     },
@@ -41,6 +44,7 @@ npm manifest:
       "dev:server": "ts-node-dev --inspect --transpileOnly --ignore node_module src/server.ts"
     },
     "dependencies": {
+      "date-fns": "^2.28.0",
       "express": "^4.18.1",
       "uuidv4": "^6.2.13"
     }
@@ -310,6 +314,11 @@ Lockfile:
     dependencies:
       array-find-index "^1.0.1"
   
+  date-fns@^2.28.0:
+    version "2.28.0"
+    resolved "https://registry.yarnpkg.com/date-fns/-/date-fns-2.28.0.tgz#9570d656f5fc13143e50c975a3b6bbeb46cd08b2"
+    integrity sha512-8d35hViGYx/QH0icHYCeLmsLmMUheMmTyV9Fcm6gvNwdw31yXXH+O85sOBJ+OLnLQMKZowvpKb6FgMIQjcpvQw==
+  
   dateformat@~1.0.4-1.2.3:
     version "1.0.12"
     resolved "https://registry.yarnpkg.com/dateformat/-/dateformat-1.0.12.tgz#9f124b67594c937ff706932e4a642cca8dbbfee9"
@@ -379,6 +388,18 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/escape-html/-/escape-html-1.0.3.tgz#0258eae4d3d0c0974de1c169188ef0051d1d1988"
     integrity sha1-Aljq5NPQwJdN4cFpGI7wBR0dGYg=
   
+  eslint-config-prettier@^8.5.0:
+    version "8.5.0"
+    resolved "https://registry.yarnpkg.com/eslint-config-prettier/-/eslint-config-prettier-8.5.0.tgz#5a81680ec934beca02c7b1a61cf8ca34b66feab1"
+    integrity sha512-obmWKLUNCnhtQRKc+tmnYuQl0pFU1ibYJQ5BGhTVB08bHe9wC8qUeG7c08dj9XX+AuPj1YSGSQIHl1pnDHZR0Q==
+  
+  eslint-plugin-prettier@^4.0.0:
+    version "4.0.0"
+    resolved "https://registry.yarnpkg.com/eslint-plugin-prettier/-/eslint-plugin-prettier-4.0.0.tgz#8b99d1e4b8b24a762472b4567992023619cb98e0"
+    integrity sha512-98MqmCJ7vJodoQK359bqQWaxOE0CS8paAz/GgjaZLyex4TTk3g9HugoO89EqWCrFiOqn9EVvcoo7gZzONCWVwQ==
+    dependencies:
+      prettier-linter-helpers "^1.0.0"
+  
   etag@~1.8.1:
     version "1.8.1"
     resolved "https://registry.yarnpkg.com/etag/-/etag-1.8.1.tgz#41ae2eeb65efa62268aebfea83ac7d79299b0887"
@@ -420,6 +441,11 @@ Lockfile:
       type-is "~1.6.18"
       utils-merge "1.0.1"
       vary "~1.1.2"
+  
+  fast-diff@^1.1.2:
+    version "1.2.0"
+    resolved "https://registry.yarnpkg.com/fast-diff/-/fast-diff-1.2.0.tgz#73ee11982d86caaf7959828d519cfe927fac5f03"
+    integrity sha512-xJuoT5+L99XlZ8twedaRf6Ax2TgQVxvgZOYoPKqZufmJib0tL2tegPBOZb1pVNgIhlqDlA0eO0c3wBvQcmzx4w==
   
   filewatcher@~3.0.0:
     version "3.0.1"
@@ -812,6 +838,18 @@ Lockfile:
     version "2.0.4"
     resolved "https://registry.yarnpkg.com/pinkie/-/pinkie-2.0.4.tgz#72556b80cfa0d48a974e80e77248e80ed4f7f870"
     integrity sha1-clVrgM+g1IqXToDnckjoDtT3+HA=
+  
+  prettier-linter-helpers@^1.0.0:
+    version "1.0.0"
+    resolved "https://registry.yarnpkg.com/prettier-linter-helpers/-/prettier-linter-helpers-1.0.0.tgz#d23d41fe1375646de2d0104d3454a3008802cf7b"
+    integrity sha512-GbK2cP9nraSSUF9N2XwUwqfzlAFlMNYYl+ShE/V+H8a9uNl/oUqB1w2EL54Jh0OlyRSd8RfWYJ3coVS4TROP2w==
+    dependencies:
+      fast-diff "^1.1.2"
+  
+  prettier@^2.6.2:
+    version "2.6.2"
+    resolved "https://registry.yarnpkg.com/prettier/-/prettier-2.6.2.tgz#e26d71a18a74c3d0f0597f55f01fb6c06c206032"
+    integrity sha512-PkUpF+qoXTqhOeWL9fu7As8LXsIUZ1WYaJiY/a7McAQzxjk82OF0tibkFXVCDImZtWxbvojFjerkiLb0/q8mew==
   
   proxy-addr@~2.0.7:
     version "2.0.7"

@@ -10,8 +10,9 @@ class Appointment{
 
     date: Date;
 
+    
     //constructor get the infos given and declare that they're are the atributes 
-    constructor(provider: string, date: Date){
+    constructor({provider, date}: Omit< Appointment, 'id'>){
         this.id = uuid();
         this.provider = provider;
         this.date = date;

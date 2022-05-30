@@ -10,6 +10,6 @@ app.listen(3333, () =>{
 });
 
 app.get('/', (request, response) =>{
-    return response.json({test: 'oigvvvvv'});
-}); 
+    return response.json({test: 'Hi Devloper :)'});
+});
 
