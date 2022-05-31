@@ -5,6 +5,6 @@ yarn tsc --init
 yarn add ts-node-dev -D
 yarn add ts-node-dev@1.0.0-pre.44 -D
 
-npm uninstall react-router-dom
-npm install react-router-dom@5.2.0
+yarn remove react-router-dom
+yarn add react-router-dom@5.2.0
 yarn add @types/react-router-dom -D
