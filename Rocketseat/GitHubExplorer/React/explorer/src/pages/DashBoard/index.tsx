@@ -1,10 +1,10 @@
 import React, {useState, FormEvent, useEffect} from "react";
 import {Title, Form, Repositories, Error} from "./styles";
 import {FiChevronRight} from 'react-icons/fi';
-import {Link} from 'react-router-dom';
+// import {Link} from 'react-router-dom';
 import logo from '../../assets/logo.svg';
 import api from "../../services/api";
-import Repository from "../Repository";
+// import Repository from "../Repository";
 
 interface Repository{
      full_name: string;
@@ -58,7 +58,7 @@ const DashBoard: React.FC = () =>{
 
      return (
           <>
-               <img src={logo} alt="GitHub Explorer" />
+               <a  href="/"><img src={logo} alt="GitHub Explorer" /></a>
                <Title>Explore repositories on GitHub</Title>     
                <Form hasError={!! inputError} onSubmit={handleAddRepository}>
                     <input 
@@ -73,7 +73,7 @@ const DashBoard: React.FC = () =>{
 
                <Repositories>
                     {repositories.map(repository => (
-                         <Link key={repository.full_name} to={`/repository/${repository.full_name}`}> 
+                         <a key={repository.full_name} href={`/repository/${repository.full_name}`}> 
                               <img 
                                    src={repository.owner.avatar_url} 
                                    alt={repository.owner.login}>
@@ -83,7 +83,7 @@ const DashBoard: React.FC = () =>{
                                    <p>{repository.description}</p>    
                               </div>
                               <FiChevronRight size={30}></FiChevronRight>
-                         </Link> 
+                         </a> 
                     ))}
                </Repositories>
           </>
