@@ -1,0 +1,7 @@
+docker run --name gostack_postgres -e POSTGRES_PASSWORD=docker -p 5432:5432 -d postgres
+
+68872713b157d5006f86b35dbcad34fabc586e20b40b1e89e4fe9fa87d94506f
+
+yarn add typeorm pg
+
+yarn typeorm 
