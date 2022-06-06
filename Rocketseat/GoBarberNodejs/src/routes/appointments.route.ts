@@ -1,54 +1,56 @@
 import { Router } from 'express';
 import { parseISO } from 'date-fns'
-import Appointment from '../models/appointment';
+import { getCustomRepository } from 'typeorm';
 import AppointmentsRepository from '../repositories/AppointmentsRepository';
 import CreateApService from '../services/CreateApService';
 
-const appointmentsRoute = Router();
+const appointmentsRouter = Router();
 
-const appointmentsRepository = new AppointmentsRepository();
+appointmentsRouter.get('/', async (request, response)=>{
 
-
-appointmentsRoute.get('/', (request, response)=>{
-
-    const appointments = appointmentsRepository.listAppointments();
-
+    const appointmentsRepository = getCustomRepository(AppointmentsRepository);
+    const appointments = await appointmentsRepository.find();
     return response.json(appointments)
 });
 
-appointmentsRoute.put('/:id', (request, response) => {
-
-    const {id} = request.params;
-    const {provider, date} = request.body;
-
-    const findAppointmentById = appointmentsRepository.findApById(id);
-
-    const appointment = appointmentsRepository.updateAppointment(provider);
-
-    if (findAppointmentById){
-        return response.json(appointment);
-    }else{
-        return response.status(400).json({error: 'Appointment not found :/'})
-    };
-
-})
-
-appointmentsRoute.post('/', (request, response) =>{
+appointmentsRouter.post('/', async (request, response) =>{
     try{
-        const {provider, date} = request.body;
-        // covert the date and change the hour to 0
+        const {provider_id, date} = request.body;
+
+        // convert the date and change the hour to 0
         const parseDate = parseISO(date);
     
-        const createAppointment = new CreateApService(appointmentsRepository);
+        const createAppointment = new CreateApService();
         
-        const appointment = createAppointment.execute({date: parseDate, provider});
+        const appointment = await createAppointment.execute({
+            date: parseDate, 
+            provider_id
+        });
         
         // return the new appointment
         return response.json(appointment);
 
     }catch(err){
-        return response.status(400).json({ error: err })
+        return response.status(400).json({ error: err.message })
     }
 })
 
-export default appointmentsRoute;
+// appointmentsRoute.put('/:id', (request, response) => {
+
+//     const {id} = request.params;
+//     const {provider, date} = request.body;
+//     const appointmentsRepository = getCustomRepository(AppointmentsRepository);
+
+//     const findAppointmentById = appointmentsRepository.findApById(id);
+
+//     const appointment = appointmentsRepository.updateAppointment(provider);
+
+//     if (findAppointmentById){
+//         return response.json(appointment);
+//     }else{
+//         return response.status(400).json({error: 'Appointment not found :/'})
+//     };
+
+// })
+
+export default appointmentsRouter;

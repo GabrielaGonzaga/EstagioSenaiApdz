@@ -1,0 +1,17 @@
+typeorm migration:create -n  CreateAppointment -d ./src/database/migrations
+
+yarn typeorm migration:create -n CreateAppointment -d src/database/migrations
+
+yarn typeorm migration:create -n CreateAppointments -d ./src/database/migrations
+
+yarn typeorm migration:create -n CreateAppointments
+
+yarn typeorm migration:run
+
+yarn typeorm migration:show
+
+yarn typeorm migration:revert
+
+yarn add bcryptjs
+
+yarn add jsonwebtoken

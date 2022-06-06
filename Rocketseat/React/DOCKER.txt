@@ -5,3 +5,5 @@ docker run --name gostack_postgres -e POSTGRES_PASSWORD=docker -p 5432:5432 -d p
 yarn add typeorm pg
 
 yarn typeorm 
+
+yarn add reflect-metadata
