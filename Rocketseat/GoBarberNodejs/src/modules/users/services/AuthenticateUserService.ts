@@ -1,29 +1,27 @@
-import { getRepository } from 'typeorm'; 
 import { compare } from 'bcryptjs';
 import { sign } from 'jsonwebtoken';
 import authConfig from '@config/auth';
 import User from '../infra/typeorm/entities/user'
 import AppError from '@shared/errors/AppError';
+import IUsersRepository from "../repositories/IUserRepository";
 
-interface Request{
+interface IRequest{
     email: string;
     password: string;
 }
 
-interface Response{
+interface IResponse{
     user: User;
     token: string;
 }
 
 class AuthenticateUserService{
-    public async execute({email, password}: Request): Promise<Response>{
 
-        const usersRepository = getRepository(User);
+    constructor(private usersRepository: IUsersRepository){}
 
+    public async execute({email, password}: IRequest): Promise<IResponse>{
         //find the user by the email
-        const user = await usersRepository.findOne({
-            where: {email}
-        })
+        const user = await this.usersRepository.findByEmail(email)
 
         //if don't throws an exception
         if (!user){
@@ -49,13 +47,11 @@ class AuthenticateUserService{
             subject: user.id,
             expiresIn: expiresIn,
         } )
-
         //if yes, the user is authenticated and return the user authenticated
         return {
             user,
             token
         };
-
     }
 }
 
