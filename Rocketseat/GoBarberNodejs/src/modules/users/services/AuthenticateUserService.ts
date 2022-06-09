@@ -1,8 +1,9 @@
 import { getRepository } from 'typeorm'; 
 import { compare } from 'bcryptjs';
 import { sign } from 'jsonwebtoken';
-import authConfig from '../config/auth';
-import User from '../models/user'
+import authConfig from '@config/auth';
+import User from '../infra/typeorm/entities/user'
+import AppError from '@shared/errors/AppError';
 
 interface Request{
     email: string;
@@ -26,7 +27,7 @@ class AuthenticateUserService{
 
         //if don't throws an exception
         if (!user){
-            throw new Error ('Email or passoword incorrect :/')
+            throw new AppError('Email or passoword incorrect :/', 401)
         }
 
         //if yes get the user found passoword
@@ -37,11 +38,13 @@ class AuthenticateUserService{
 
         //if the passowrd is wrong throws an exception
         if (!passowordMatched){
-            throw new Error ('Email or passoword incorrect :/')
+            throw new AppError('Email or passoword incorrect :/', 401)
         }
 
+        //get the configurations from authConfig
         const {secret, expiresIn} = authConfig.jwt;
 
+        // get the token given and turn it into a token 
         const token = sign({}, secret,{
             subject: user.id,
             expiresIn: expiresIn,

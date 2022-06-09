@@ -1,6 +1,7 @@
 import { hash } from 'bcryptjs';
 import { getRepository } from 'typeorm'; // function to use a repository with non custom methods
-import User from '../models/user'
+import AppError from '@shared/errors/AppError';
+import User from '../infra/typeorm/entities/user'
 
 interface Request{
     name:string;
@@ -18,7 +19,7 @@ class CreateUserService{
         })
         //if don't throws an exception
         if (checkUserExists){
-            throw new Error('Email adress already used.')
+            throw new AppError('Email adress already used.')
         }
 
         const hashedPassword = await hash(password, 8)

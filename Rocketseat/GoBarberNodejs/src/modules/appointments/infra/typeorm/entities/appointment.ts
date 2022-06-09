@@ -1,21 +1,31 @@
-import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn} from "typeorm";
+import { Entity, 
+  Column, 
+  PrimaryGeneratedColumn, 
+  CreateDateColumn,
+  UpdateDateColumn,
+  ManyToOne,
+  JoinColumn
+} from "typeorm";
+
+import User from "@modules/users/infra/typeorm/entities/user";
 
 // class appointment
-@Entity('users')
-class User  {
+@Entity('appointments')
+class Appointment  {
     //declare the atributes/params
     
     @PrimaryGeneratedColumn('uuid')
     id: string;
 
     @Column()
-    name: string;
+    provider_id: string;
 
-    @Column()
-    email: string;
+    @ManyToOne(() => User)
+    @JoinColumn({name: 'provider_id'})
+    provider: User;
 
-    @Column()
-    password: string;
+    @Column('timestamp with time zone')
+    date: Date;
 
     @CreateDateColumn()
     created_at: Date;
@@ -24,7 +34,7 @@ class User  {
     updated_at: Date;
 }
 
-export default User;
+export default Appointment;
 
   // //constructor get the infos given and declare that they're are the atributes 
     // constructor({provider, date}: Omit< Appointment, 'id'>){
