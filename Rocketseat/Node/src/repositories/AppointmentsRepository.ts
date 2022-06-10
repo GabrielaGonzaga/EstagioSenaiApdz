@@ -58,7 +58,7 @@ class AppointmentsRepository {
             date
         }
 
-        const findApById = this.findApById(id);
+       const findApById = this.findApById(id);
     
        this.appointments[findApById] = appointment;
 
