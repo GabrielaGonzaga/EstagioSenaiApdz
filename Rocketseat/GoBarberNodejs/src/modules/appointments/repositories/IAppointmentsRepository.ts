@@ -7,6 +7,6 @@ export default interface IAppointmentsRepository {
 
     findApByDate( date: Date): Promise<Appointment|undefined>;
 
-    findApById( id: string): Promise<Appointment|undefined>;
+    // findApById( id: string): Promise<Appointment|undefined>;
 
 }

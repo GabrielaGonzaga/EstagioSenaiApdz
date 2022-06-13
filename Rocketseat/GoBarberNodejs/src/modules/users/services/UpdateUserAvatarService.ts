@@ -1,3 +1,4 @@
+import "reflect-metadata";
 import { injectable, inject } from 'tsyringe';
 import path from 'path';
 import fs  from "fs";

@@ -1,3 +1,4 @@
+import "reflect-metadata";
 import { compare } from 'bcryptjs';
 import { sign } from 'jsonwebtoken';
 import { injectable, inject } from 'tsyringe';
@@ -15,9 +16,9 @@ interface IResponse{
     user: User;
     token: string;
 }
+
 @injectable()
 class AuthenticateUserService{
-
     constructor(
         @inject('UsersRepository')
         private usersRepository: IUsersRepository
@@ -31,7 +32,6 @@ class AuthenticateUserService{
         if (!user){
             throw new AppError('Email or passoword incorrect :/', 401)
         }
-
         //if yes get the user found passoword
         user.password
 
