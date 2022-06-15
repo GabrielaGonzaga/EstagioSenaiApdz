@@ -3,7 +3,7 @@
 
 Projeto desenvolvido durante o curso de NojeJS Back-end, TDD, SOLID e Typeorm, pela RocketSeat 
 
-## Documentação da API
+## API Docmuentation
 
 #### Create a new appointment
 ```http
