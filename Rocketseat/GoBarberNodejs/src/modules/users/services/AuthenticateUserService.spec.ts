@@ -45,7 +45,7 @@ describe('AuthenticateUser', () =>{
         //use the user service by the fake repopsitory/interface
         const authenticateUser = new AuthenticateUserService(fakeUsersRepository, fakeHashProvider);
 
-        expect(
+        await expect(
             authenticateUser.execute({
                 email: 'email@gmail.com',
                 password: '123456'
@@ -73,7 +73,7 @@ describe('AuthenticateUser', () =>{
        });
 
        //verify if the user have an id
-       expect(authenticateUser.execute({
+       await expect(authenticateUser.execute({
             email: 'email@gmail.com',
             password: 'wrong-passoword'
         })).rejects.toBeInstanceOf(AppError)

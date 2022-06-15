@@ -2,7 +2,7 @@ import "reflect-metadata";
 import { sign } from 'jsonwebtoken';
 import { injectable, inject } from 'tsyringe';
 import authConfig from '@config/auth';
-import User from '../infra/typeorm/entities/user'
+import User from '../infra/typeorm/entities/User'
 import AppError from '@shared/errors/AppError';
 import IUsersRepository from "../repositories/IUserRepository";
 import FakeHashProvider from "../providers/HashProvider/fakes/FakeHashProvider";

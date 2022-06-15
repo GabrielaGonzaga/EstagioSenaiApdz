@@ -2,7 +2,7 @@ import "reflect-metadata";
 import { injectable, inject } from 'tsyringe';
 import IHashProvider from "../providers/HashProvider/models/IHashProvider";
 import AppError from '@shared/errors/AppError';
-import User from '../infra/typeorm/entities/user'
+import User from '../infra/typeorm/entities/User'
 import IUsersRepository from "../repositories/IUserRepository";
 
 interface IRequest{

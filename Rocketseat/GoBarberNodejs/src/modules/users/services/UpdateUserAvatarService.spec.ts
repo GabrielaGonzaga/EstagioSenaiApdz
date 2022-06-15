@@ -42,7 +42,7 @@ describe('UpdateUserAvatar', () =>{
         const updateUserAvatar = new UpdateUserAvatarService(fakeUsersRepository, fakeStorageProvider);
 
         //verify if the user have an id
-        expect(updateUserAvatar.execute({
+        await expect(updateUserAvatar.execute({
             user_id: 'non-exist-userId',
             avatarFilename: 'foto.png'
         }),).rejects.toBeInstanceOf(AppError);
