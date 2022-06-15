@@ -3,10 +3,12 @@ import crypto from 'crypto';
 import path from 'path';
 
 const tmpFolder = path.resolve(__dirname, '..', '..', 'tmp');
+const uploadsFolder = path.resolve(tmpFolder, 'uploads');
 
 //used to get the photos uploaded
 export default {
-    directory: tmpFolder,
+    tmpFolder: tmpFolder,
+    uploadsFolder: uploadsFolder,
 
     storage : multer.diskStorage({
         //all the images uploaded 'll go to the this destination

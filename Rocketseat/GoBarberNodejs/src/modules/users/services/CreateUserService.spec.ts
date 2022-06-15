@@ -3,7 +3,7 @@ import FakeHashProvider from "../providers/HashProvider/fakes/FakeHashProvider";
 import FakeUsersRepository from '../../users/repositories/fakes/FakeUserRepository'
 import AppError from "@shared/errors/AppError";
 
-describe('CreateAppointment', () =>{
+describe('CreateUser', () =>{
     
     it('should be able to create a new user', async () =>{
 

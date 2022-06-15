@@ -1,11 +1,11 @@
 import "reflect-metadata";
-import { compare } from 'bcryptjs';
 import { sign } from 'jsonwebtoken';
 import { injectable, inject } from 'tsyringe';
 import authConfig from '@config/auth';
 import User from '../infra/typeorm/entities/user'
 import AppError from '@shared/errors/AppError';
 import IUsersRepository from "../repositories/IUserRepository";
+import FakeHashProvider from "../providers/HashProvider/fakes/FakeHashProvider";
 
 interface IRequest{
     email: string;
@@ -21,7 +21,10 @@ interface IResponse{
 class AuthenticateUserService{
     constructor(
         @inject('UsersRepository')
-        private usersRepository: IUsersRepository
+        private usersRepository: IUsersRepository,
+
+        @inject('HashProvider')
+        private readonly hashProvider: FakeHashProvider
     ){}
 
     public async execute({email, password}: IRequest): Promise<IResponse>{
@@ -34,7 +37,7 @@ class AuthenticateUserService{
         }
 
         //compare the encrypt passoword with the passoerd given
-        const passowordMatched = await compare(password, user.password);
+        const passowordMatched = await this.hashProvider.compareHash(password, user.password);
 
         //if the passowrd is wrong throws an exception
         if (!passowordMatched){
