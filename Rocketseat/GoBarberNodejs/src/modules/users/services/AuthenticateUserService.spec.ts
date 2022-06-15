@@ -1,5 +1,6 @@
 import AuthenticateUserService from "./AuthenticateUserService";
 import FakeUsersRepository from '../../users/repositories/fakes/FakeUserRepository'
+import FakeHashProvider from "../providers/HashProvider/fakes/FakeHashProvider";
 import AppError from "@shared/errors/AppError";
 import CreateUserService from "./CreateUserService";
 
@@ -9,8 +10,9 @@ describe('CreateAppointment', () =>{
 
         //instance the fake repository
         const fakeUsersRepository = new FakeUsersRepository();
+        const fakeHashProvider = new FakeHashProvider();
 
-        const createUser = new CreateUserService(fakeUsersRepository);
+        const createUser = new CreateUserService(fakeUsersRepository, fakeHashProvider);
 
         //use the user service by the fake repopsitory/interface
         const authenticateUser = new AuthenticateUserService(fakeUsersRepository);

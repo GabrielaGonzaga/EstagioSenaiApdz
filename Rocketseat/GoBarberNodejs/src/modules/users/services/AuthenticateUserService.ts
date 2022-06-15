@@ -32,8 +32,6 @@ class AuthenticateUserService{
         if (!user){
             throw new AppError('Email or passoword incorrect :/', 401)
         }
-        //if yes get the user found passoword
-        user.password
 
         //compare the encrypt passoword with the passoerd given
         const passowordMatched = await compare(password, user.password);
