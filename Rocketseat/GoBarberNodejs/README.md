@@ -11,7 +11,7 @@ Projeto desenvolvido durante o curso de NojeJS Back-end, TDD, SOLID e Typeorm, p
 ```
 | Parâmetro   | Tipo       | Descrição                           |
 | :---------- | :--------- | :---------------------------------- |
-| `provider_id` | `string` | the provider/baber that will accomplish the service **(mandatory)** |
+| `provider_id` | `string` | the provider/baber id that will accomplish the service **(mandatory)** |
 | `date` | `date` | the appointment date **(mandatory)** |
 
 #### Create a new user
