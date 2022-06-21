@@ -21,7 +21,7 @@ interface IResponse{
 class AuthenticateUserService{
     constructor(
         @inject('UsersRepository')
-        private usersRepository: IUsersRepository,
+        private UsersRepository: IUsersRepository,
 
         @inject('HashProvider')
         private readonly hashProvider: FakeHashProvider
@@ -29,7 +29,7 @@ class AuthenticateUserService{
 
     public async execute({email, password}: IRequest): Promise<IResponse>{
         //find the user by the email
-        const user = await this.usersRepository.findByEmail(email)
+        const user = await this.UsersRepository.findByEmail(email)
 
         //if don't throws an exception
         if (!user){

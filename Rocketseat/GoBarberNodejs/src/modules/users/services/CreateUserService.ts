@@ -16,15 +16,16 @@ class CreateUserService{
 
     constructor(
         @inject('UsersRepository')
-        private usersRepository: IUsersRepository,
+        private UsersRepository: IUsersRepository,
 
+        @inject('HashProvider')
         private hashProvider : IHashProvider 
     ){}
 
     public async execute({name, email, password}: IRequest):  Promise<User> {
 
         //Verify if the email is unique
-        const checkUserExists = await this.usersRepository.findByEmail(email)
+        const checkUserExists = await this.UsersRepository.findByEmail(email)
         //if don't throws an exception
         if (checkUserExists){
             throw new AppError('Email adress already used.')
@@ -33,7 +34,7 @@ class CreateUserService{
         const hashedPassword = await this.hashProvider.generateHash(password)
 
         //create the new user and save
-        const user = await this.usersRepository.create({
+        const user = await this.UsersRepository.create({
             name,
             email,
             password: hashedPassword,

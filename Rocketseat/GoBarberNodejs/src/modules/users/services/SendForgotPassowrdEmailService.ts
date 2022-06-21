@@ -2,7 +2,7 @@ import "reflect-metadata";
 import { injectable, inject } from 'tsyringe';
 import AppError from '@shared/errors/AppError';
 import IUsersRepository from "../repositories/IUsersRepository";
-import IUserTokenRepository from "../repositories/IUserTokensRepository";
+import IUserTokensRepository from "../repositories/IUserTokensRepository";
 import IMailProvider from "@shared/container/providers/MailProvider/models/IMailProvider";
 
 interface IRequest{
@@ -20,10 +20,11 @@ class SendForgotPassowrdEmailService{
         private mailProvider: IMailProvider,
 
         @inject('UserTokensRepository')
-        private userTokensRepository: IUserTokenRepository,
+        private userTokensRepository: IUserTokensRepository,
     ){}
 
     public async execute({email}: IRequest):  Promise<void> {
+        
         const user = await this.usersRepository.findByEmail(email)
 
         if(!user){
@@ -32,7 +33,7 @@ class SendForgotPassowrdEmailService{
         
         await  this.userTokensRepository.generate(user.id);
 
-        this.mailProvider.sendMail(email, 'Recover password requisition received')
+        await this.mailProvider.sendMail(email, 'Recover password requisition received')
     }
 }
 

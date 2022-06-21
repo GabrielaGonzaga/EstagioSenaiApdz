@@ -12,7 +12,7 @@ class UsersRepository implements IUsersRepository{
      constructor(){
         //create the repository typed above
         this.ormRepository = getRepository(User);
-     }
+    }
    
     public async findById(id: string): Promise<User | undefined>{
 
@@ -42,8 +42,6 @@ class UsersRepository implements IUsersRepository{
 
         return user;
     }
-
-
 }
 
 export default UsersRepository
