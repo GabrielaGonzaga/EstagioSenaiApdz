@@ -1,4 +1,5 @@
 import "reflect-metadata";
+import path from "path";
 import { injectable, inject } from 'tsyringe';
 import AppError from '@shared/errors/AppError';
 import IUsersRepository from "../repositories/IUsersRepository";
@@ -31,9 +32,23 @@ class SendForgotPassowrdEmailService{
             throw new AppError('User does not exists')
         }
         
-        await  this.userTokensRepository.generate(user.id);
+        const {token} = await this.userTokensRepository.generate(user.id);
+        const forgotPasswordTemplate = path.resolve(__dirname, '..', 'views', 'forgot.password.hbs')
 
-        await this.mailProvider.sendMail(email, 'Recover password requisition received')
+        await this.mailProvider.sendMail({
+            to: {
+                name: user.name,
+                email: user.email
+            },
+            subject: '[GoBarber] Password recover',
+            templateData:{
+                file: forgotPasswordTemplate,
+                variables:{
+                    name: user.name,
+                    link: `http://localhost:3000/reset_password?token=${token}`,
+                },
+            },
+        });
     }
 }
 
