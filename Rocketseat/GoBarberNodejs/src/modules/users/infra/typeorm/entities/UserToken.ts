@@ -1,7 +1,7 @@
 import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, Generated} from "typeorm";
 
 // class appointment
-@Entity('users_tokens')
+@Entity('user_tokens')
 class UserToken  {
     //declare the atributes/params
     

@@ -4,7 +4,7 @@ import ListProviderService from "./ListProvidersService";
 let fakeUsersRepository: FakeUsersRepository;
 let listProviders: ListProviderService;
 
-describe('ListProviders', () =>{
+describe('ListProviderMonthAvailability', () =>{
 
     
     beforeEach(() => {

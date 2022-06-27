@@ -7,6 +7,7 @@ import IAppointmentsRepository from "../repositories/IAppointmentsRepository";
 
 interface RequestDTO{
     provider_id: string;
+    user_id: string
     date: Date;
 }
 
@@ -18,7 +19,7 @@ class CreateApService {
         private appointmentsRepository:IAppointmentsRepository
     ){}
 
-    public async execute({date, provider_id}: RequestDTO): Promise<Appointment>{
+    public async execute({date, user_id, provider_id}: RequestDTO): Promise<Appointment>{
 
     const appointmentDate = startOfHour(date);
     // search appointments that have the same date by the method findApByDate
@@ -30,6 +31,7 @@ class CreateApService {
     // create a new appointment by the create method on the AppointementsRepository and save
     const appointment = await this.appointmentsRepository.create({
         provider_id, 
+        user_id,
         date: appointmentDate
     });
 
