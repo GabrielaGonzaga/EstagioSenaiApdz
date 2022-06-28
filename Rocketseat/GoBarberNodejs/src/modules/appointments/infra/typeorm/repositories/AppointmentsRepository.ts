@@ -16,6 +16,20 @@ class AppointmentsRepository implements IAppointmentsRepository{
         this.ormRepository = getRepository(Appointment);
      }
 
+     public async findAllInMonthProvider({provider_id, month, year}: IFindAllMonthFromProviderDTO): Promise<Appointment[]> {
+        // if the month is only with 2 algarisms it will pass the 0 on the start
+        const parsedMonth = String(month).padStart(2, '0');
+
+        const appoitments = await this.ormRepository.find({
+            where: {
+                provider_id, 
+                date: Raw(dateFieldName => `to_char(${dateFieldName}, 'MM-YYYY') = '${parsedMonth}-${year}'`)
+            }
+        })
+
+        return appoitments
+    }
+
     public async findAllInDayProvider({provider_id, day, month, year}: IFindAllDayFromProviderDTO): Promise<Appointment[]> {
         const parsedDay = String(day).padStart(2, '0');
         const parsedMonth = String(month).padStart(2, '0');
@@ -23,21 +37,7 @@ class AppointmentsRepository implements IAppointmentsRepository{
         const appoitments = await this.ormRepository.find({
             where: {
                 provider_id, 
-                date: Raw(dateFieldName => `toChar(${dateFieldName}, 'DD-MM-YYYY') = ${parsedDay}-${parsedMonth}-${year}`)
-            }
-        })
-
-        return appoitments
-    }
-
-     public async findAllInMonthProvider({provider_id, month, year}: IFindAllMonthFromProviderDTO): Promise<Appointment[]> {
-        // if the month is only with 2 algarisms it will pass the 0 on the start
-        const parseMonth = String(month).padStart(2, '0');
-
-        const appoitments = await this.ormRepository.find({
-            where: {
-                provider_id, 
-                date: Raw(dateFieldName => `toChar(${dateFieldName}, 'MM-YYYY') = ${parseMonth}-${year}`)
+                date: Raw(dateFieldName => `to_char(${dateFieldName}, 'DD-MM-YYYY') = '${parsedDay}-${parsedMonth}-${year}'`)
             }
         })
 
